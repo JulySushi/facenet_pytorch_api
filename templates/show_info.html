@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatable" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        table {
+            font-Family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <h2 style="text-align:center;">Show Contact</h2>
+    <!--获取flash消息-->
+    {% with messages = get_flashed_messages() %}
+    <!--如果信息存在-->
+        {% if messages %}
+    <!--循环打印-->
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h3>Contacts(<a href="/add_info">Add Contact</a>)</h3>
+    <form method="post" action="/show_info", enctype="multipart/form-data">
+    搜索：
+		<input type="text" name="search"  style="width:80px;">
+		<input type="submit" name="buttonSearch" value="搜索">
+		<span class="note">（姓名搜索）</span>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>名字</th>
+                <th>年龄</th>
+                <th>更新日期</th>
+                <th>编辑/删除</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for contact in contacts %}
+                 <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.age }}</td>
+                    <td>{{ contact.timeRenew }}</td>
+                     <td>
+						<a href="/update/{{ contact.id }}" title="修改">
+								<img src="static/images/icon_edit.gif" border="0" /></a>&emsp;
+						<a href="/delete/{{ contact.id }}" onclick="return confirm('确定要删除吗？');" title="删除">
+								<img src="static/images/icon_delete.gif" border="0" /></a>
+					</td>
+<!--                    <td><a href="/update/{{ contact.id }}" >update</a></td>-->
+<!--                    <td><a href="/delete/{{ contact.id }}" onclick="return confirm('确定要删除吗？');">delete</a></td>-->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

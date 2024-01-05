@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatable" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户功能</title>
+    <style>
+        /* 定义表格样式 */
+        table {
+            border-collapse: collapse; /* 边框合并为一个 */
+            width: 100%; /* 表格宽度 */
+        }
+        th, td {
+            border: 1px solid black; /* 表格单元格边框 */
+            padding: 8px; /* 内边距 */
+            text-align: left; /* 文字左对齐 */
+        }
+        th {
+            background-color: #f2f2f2; /* 头部背景颜色 */
+        }
+        a {
+            text-decoration: none; /* 无下划线 */
+            color: blue; /* 链接颜色 */
+        }
+    </style>
+</head>
+<body>
+    <h3 style="text-align:center;">欢迎!</h3>
+    <table style="width:600px; margin:0 auto;">
+        <tr height="50" class="tr_header">
+            <th colspan="2">用户功能列表</th>
+        </tr>
+        <tr height="50">
+            <td>人员管理</td>
+            <td class="left">
+                <a href="show_info">人员列表</a>&emsp;&emsp;
+                <a href="add_info">人员新添</a>&emsp;&emsp;
+            </td>
+        </tr>
+        <tr height="50">
+            <td>图片管理</td>
+            <td class="left">
+                <a href="show_image">照片列表</a>&emsp;&emsp;
+                <a href="uploader">照片新添</a>&emsp;&emsp;
+            </td>
+        </tr>
+        <tr height="50">
+            <td>模型预测</td>
+            <td class="left">
+                <a href="predict_image">图片预测</a>&emsp;&emsp;
+                <a href="predict_video">视频预测</a>&emsp;&emsp;
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

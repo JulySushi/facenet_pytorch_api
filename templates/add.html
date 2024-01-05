@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatable" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+</head>
+
+<body>
+<!--获取flash消息-->
+    {% with messages = get_flashed_messages() %}
+<!--如果信息存在-->
+        {% if messages %}
+<!--循环打印-->
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h2 style="text-align:center;">Contace From</h2>
+
+    <form action="/add_info" method="post">
+        <fieldset>
+            <legend>Personal information:</legend>
+<!--            防止表单自动提交-->
+        {{ form.hidden_tag() }}
+        <div style="font-size:20px;font-weight:bold;margin-left:150px;">
+            {{ form.name.label }} <br> {{ form.name }}
+            <br>
+            {{ form.age.label }} <br>{{ form.age }}
+            <br>
+            {{ form.submit }}
+        </div>
+        </fieldset>
+    </form>
+</body>
+</html>
+
+</body>
+</html>

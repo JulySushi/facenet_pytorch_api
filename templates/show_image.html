@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatable" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        table {
+            font-Family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+
+    <h2 style="text-align:center;">Show Contact</h2>
+    <!--获取flash消息-->
+    {% with messages = get_flashed_messages() %}
+    <!--如果信息存在-->
+        {% if messages %}
+    <!--循环打印-->
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h3>Contacts(<a href="/uploader">upload</a>)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>图片</th>
+                <th>删除</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for contact in contacts %}
+                 <tr>
+                    <td>{{ contact.imageName }}</td>
+                    <td><img src="{{ url_for('static', filename='uploaddir/' + contact.imageName + '/' + contact.imagePath) }}" alt="{{ name }}"width="13%" height="13%"></td>
+                    <td>
+						<a href="/deleteImage/{{ contact.imageId }}" onclick="return confirm('确定要删除吗？');" title="删除">
+								<img src="static/images/icon_delete.gif" border="0" /></a>
+					</td>
+                 </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
