@@ -1,0 +1,10 @@
+flask
+flask_sqlalchemy
+flask_wtf
+mysqlclient
+wtforms==2.3.3
+tensorboard
+opencv-python
+facenet_pytorch
+torch==2.1.2
+torchvision==0.16.2

@@ -10,9 +10,6 @@ import torch
 from torchvision import transforms
 from PIL import Image
 import os
-import numpy as np
-import mmcv, cv2
-from PIL import Image, ImageDraw
 
 app = Flask(__name__)
 
@@ -280,50 +277,50 @@ def predict_image():
         return render_template('predict_image.html')
 
 
-@app.route('/predict_video', methods=['GET', 'POST'])
-def predict_video():
-    if request.method == 'POST':
-        # 获取上传的文件
-        f = request.files['file111']
-        if f.filename.split('.')[-1] != 'mp4':
-            flash('请上传mp4格式的视频')
-            return render_template('predict_video.html', contacts=tb_info.query.all())
-        # 保存文件，join拼接路径
-        path = os.path.join('static/predict/', secure_filename(f.filename))
-        f.save(path)
-
-        device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-        print('在该设备上运行: {}'.format(device))
-        mtcnn = MTCNN(keep_all=True, device=device)
-        video = mmcv.VideoReader(path)
-        frames = [Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)) for frame in video]
-        frames_tracked = []
-        for i, frame in enumerate(frames):
-            print('\r当前帧: {}'.format(i + 1), end='')
-
-            # 检测人脸
-            boxes, _ = mtcnn.detect(frame)
-
-            # 绘制人脸框
-            frame_draw = frame.copy()
-            draw = ImageDraw.Draw(frame_draw)
-            for box in boxes:
-                draw.rectangle(box.tolist(), outline=(255, 0, 0), width=6)
-
-            # 添加到图像列表
-            frames_tracked.append(frame_draw.resize((640, 360), Image.BILINEAR))
-        print('\n结束')
-        dim = frames_tracked[0].size
-        fourcc = cv2.VideoWriter_fourcc(*'FMP4')
-        video_tracked = cv2.VideoWriter(path, fourcc, 25.0, dim)
-        for frame in frames_tracked:
-            video_tracked.write(cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR))
-        video_tracked.release()
-
-        return render_template('video_Show.html', name=f.filename)
-    elif request.method == 'GET':
-        return render_template('predict_video.html',)
+# @app.route('/predict_video', methods=['GET', 'POST'])
+# def predict_video():
+#     if request.method == 'POST':
+#         # 获取上传的文件
+#         f = request.files['file111']
+#         if f.filename.split('.')[-1] != 'mp4':
+#             flash('请上传mp4格式的视频')
+#             return render_template('predict_video.html', contacts=tb_info.query.all())
+#         # 保存文件，join拼接路径
+#         path = os.path.join('static/predict/', secure_filename(f.filename))
+#         f.save(path)
+#
+#         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+#         print('在该设备上运行: {}'.format(device))
+#         mtcnn = MTCNN(keep_all=True, device=device)
+#         video = mmcv.VideoReader(path)
+#         frames = [Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)) for frame in video]
+#         frames_tracked = []
+#         for i, frame in enumerate(frames):
+#             print('\r当前帧: {}'.format(i + 1), end='')
+#
+#             # 检测人脸
+#             boxes, _ = mtcnn.detect(frame)
+#
+#             # 绘制人脸框
+#             frame_draw = frame.copy()
+#             draw = ImageDraw.Draw(frame_draw)
+#             for box in boxes:
+#                 draw.rectangle(box.tolist(), outline=(255, 0, 0), width=6)
+#
+#             # 添加到图像列表
+#             frames_tracked.append(frame_draw.resize((640, 360), Image.BILINEAR))
+#         print('\n结束')
+#         dim = frames_tracked[0].size
+#         fourcc = cv2.VideoWriter_fourcc(*'FMP4')
+#         video_tracked = cv2.VideoWriter(path, fourcc, 25.0, dim)
+#         for frame in frames_tracked:
+#             video_tracked.write(cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR))
+#         video_tracked.release()
+#
+#         return render_template('video_Show.html', name=f.filename)
+#     elif request.method == 'GET':
+#         return render_template('predict_video.html',)
 
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
