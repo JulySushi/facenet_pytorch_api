@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatable" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>上传页</title>
 </head>
 <body>
 <!--获取flash消息-->
@@ -17,15 +17,17 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <form method="post" action="/uploader", enctype="multipart/form-data">
+    <h2 style="text-align:center;">上传图片</h2>
+    <form method="post" action="/uploader", enctype="multipart/form-data" style="width: 30%; margin: auto">
         <div style="display:block;float:left; margin-left:0px; margin-top:10px; background-color:#fff0f0;">
+            为谁上传图片：
                <select name="hito">
                     {% for contact in contacts %}
                         <option value="{{ contact.name }}">{{ contact.name }}</option>
                     {% endfor %}
                 </select>
             <div id="PlaceHolderFileUpload" style="border-color:#FF99CC;border-width:1px;border-style:solid;width:800px;">
-                &nbsp;<b>上传文件</b> 文件1: <input type="file" name="file111" id="FileUploadFileName" style="width:600px;"><br>
+                &nbsp;<b>图片文件</b> 文件1: <input type="file" name="file111" id="FileUploadFileName" style="width:600px;"><br>
                 &nbsp;<b>　　　　</b> 文件2: <input type="file" name="file222" id="FileUploadFileName2" style="width:600px;"><br>
                 &nbsp;<b>　　　　</b> 文件3: <input type="file" name="file333" id="FileUploadFileName3" style="width:600px;"><br>
                 &nbsp;<b>　　　　　          </b><input type="submit" name="ButtonFileUploadSubmit" value="提交" style="color:#990000;">

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatable" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
+    <title>图片列表</title>
     <style>
         table {
             font-Family: arial, sans-serif;
@@ -26,7 +26,7 @@
 <body>
 
 
-    <h2 style="text-align:center;">Show Contact</h2>
+    <h2 style="text-align:center;">图片列表</h2>
     <!--获取flash消息-->
     {% with messages = get_flashed_messages() %}
     <!--如果信息存在-->
@@ -37,7 +37,7 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <h3>Contacts(<a href="/uploader">upload</a>)</h3>
+    <h3>上传(<a href="/uploader">图片</a>)</h3>
     <table>
         <thead>
             <tr>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatable" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
+    <title>用户信息列表</title>
     <style>
         table {
             font-Family: arial, sans-serif;
@@ -38,7 +38,7 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <h3>Contacts(<a href="/add_info">Add Contact</a>)</h3>
+    <h3>信息(<a href="/add_info">添加</a>)</h3>
     <form method="post" action="/show_info", enctype="multipart/form-data">
     搜索：
 		<input type="text" name="search"  style="width:80px;">

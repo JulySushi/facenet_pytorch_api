@@ -10,7 +10,7 @@ import torch
 from torchvision import transforms
 from PIL import Image
 import os
-
+import numpy as np
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@8.134.24.224:3309/db_intershipf'

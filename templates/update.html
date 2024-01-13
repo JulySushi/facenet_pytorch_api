@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatable" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Form</title>
+  <title>信息修改</title>
 </head>
 
 <body>
@@ -18,18 +18,19 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <h2 style="text-align:center;">Contace From</h2>
+    <h2 style="text-align:center;">信息修改</h2>
 
     <form action="/update/{{ id }}" method="post">
         <fieldset>
-            <legend>Personal information:</legend>
+            <legend>个人信息：</legend>
 <!--            防止表单自动提交-->
         {{ form.hidden_tag() }}
         <div style="font-size:20px;font-weight:bold;margin-left:150px;">
-            {{ form.name.label }} <br>
+            姓名<br>
             {{ form.name }}
             <br>
-            {{ form.age.label }} <br> {{ form.age }}
+            年龄
+            <br> {{ form.age }}
             <br>
             {{ form.submit }}
         </div>
